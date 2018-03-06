@@ -14,16 +14,22 @@
   version = "v1.0"
 
 [[projects]]
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
+  version = "v0.0.2"
+
+[[projects]]
   branch = "develop"
   name = "github.com/nmiyake/pkg"
   packages = ["dirs","errorstringer","gofiles"]
   revision = "b64318170fdef93b4462420e0badef8050dbb7ec"
 
 [[projects]]
+  branch = "master"
   name = "github.com/palantir/godel"
-  packages = ["framework/builtintasks/installupdate/layout","framework/godel","framework/godellauncher","framework/pluginapi","framework/verifyorder"]
-  revision = "9fba28ed4a584d3f64dfc6e78569b343e45152e2"
-  version = "1.3.0"
+  packages = ["framework/artifactresolver","framework/builtintasks/installupdate/layout","framework/godel","framework/godellauncher","framework/pluginapi","framework/verifyorder","godelgetter","pkg/osarch"]
+  revision = "23cdea0b00851e6cbdc14f50676c43ba26b47894"
 
 [[projects]]
   branch = "master"
@@ -62,6 +68,18 @@
   version = "v1.2.1"
 
 [[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "dd2ff4accc098aceecb86b36eaa7829b2a17b1c9"
+
+[[projects]]
+  name = "gopkg.in/cheggaaa/pb.v1"
+  packages = ["."]
+  revision = "72b964305fba1230d3d818711138195f22b9ceea"
+  version = "v1.0.22"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
@@ -70,6 +88,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "57bb3b50761abf63a6d1d717bc1c0eccedc75832fce31e990fbab2b3e99bec2d"
+  inputs-digest = "2522f0f25448e99a483f2a481382271a2660e9773fbd3cb54c76b3f2e2a4912f"
   solver-name = "gps-cdcl"
   solver-version = 1
