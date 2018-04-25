@@ -22,8 +22,6 @@ import (
 	"github.com/palantir/go-extimport/cmd"
 )
 
-var debugFlagVal bool
-
 func main() {
-	os.Exit(cobracli.ExecuteWithDefaultParamsWithVersion(cmd.RootCmd, &debugFlagVal, ""))
+	os.Exit(cobracli.ExecuteWithDefaultParams(cmd.RootCmd))
 }
