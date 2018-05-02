@@ -16,13 +16,14 @@ package cmd
 
 import (
 	"github.com/palantir/godel/framework/pluginapi"
+	"github.com/palantir/pkg/cobracli"
 	"github.com/spf13/cobra"
 
 	"github.com/palantir/go-extimport/extimport"
 )
 
 var (
-	RootCmd = &cobra.Command{
+	rootCmd = &cobra.Command{
 		Use:   "extimport [flags] [packages]",
 		Short: "checks whether project imports any external packages (packages that are not within the project or its vendor directories)",
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -35,8 +36,12 @@ var (
 	allFlagVal        bool
 )
 
+func Execute() int {
+	return cobracli.ExecuteWithDefaultParams(rootCmd)
+}
+
 func init() {
-	pluginapi.AddProjectDirPFlagPtr(RootCmd.Flags(), &projectDirFlagVal)
-	RootCmd.Flags().BoolVar(&listFlagVal, "list", false, "print external dependencies one per line")
-	RootCmd.Flags().BoolVar(&allFlagVal, "all", false, "list all external dependencies, including those multiple levels deep")
+	pluginapi.AddProjectDirPFlagPtr(rootCmd.Flags(), &projectDirFlagVal)
+	rootCmd.Flags().BoolVar(&listFlagVal, "list", false, "print external dependencies one per line")
+	rootCmd.Flags().BoolVar(&allFlagVal, "all", false, "list all external dependencies, including those multiple levels deep")
 }
