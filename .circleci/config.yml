@@ -57,12 +57,12 @@ jobs:
   go-1.10:
     <<: *working_dir
     docker:
-      - image: golang:1.10.1
+      - image: golang:1.10.2
     steps: *steps_array
   go-1.9:
     <<: *working_dir
     docker:
-      - image: golang:1.9.5
+      - image: golang:1.9.6
     steps: *steps_array
 
 workflows:
