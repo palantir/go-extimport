@@ -181,6 +181,44 @@ func TestExtimport(t *testing.T) {
 			},
 		},
 		{
+			name: "skips testdata packages",
+			getArgs: func(projectDir string) (string, []string) {
+				return path.Join(projectDir, "foo"), []string{"./testdata"}
+			},
+			files: []gofiles.GoFileSpec{
+				{
+					RelPath: "foo/testdata/foo.go",
+					Src:     `package foo; import "{{index . "bar/bar.go"}}";`,
+				},
+				{
+					RelPath: "bar/bar.go",
+					Src:     `package bar`,
+				},
+			},
+			verify: func(files map[string]gofiles.GoFile, got string, err error, caseNum int, caseName string) {
+				assert.NoError(t, err, "Case %d (%s)", caseNum, caseName)
+			},
+		},
+		{
+			name: "skips packages within testdata packages",
+			getArgs: func(projectDir string) (string, []string) {
+				return path.Join(projectDir, "foo"), []string{"./testdata/foo"}
+			},
+			files: []gofiles.GoFileSpec{
+				{
+					RelPath: "foo/testdata/foo/foo.go",
+					Src:     `package foo; import "{{index . "bar/bar.go"}}";`,
+				},
+				{
+					RelPath: "bar/bar.go",
+					Src:     `package bar`,
+				},
+			},
+			verify: func(files map[string]gofiles.GoFile, got string, err error, caseNum int, caseName string) {
+				assert.NoError(t, err, "Case %d (%s)", caseNum, caseName)
+			},
+		},
+		{
 			name: "error if an external package is imported",
 			getArgs: func(projectDir string) (string, []string) {
 				return path.Join(projectDir, "foo"), nil
