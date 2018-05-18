@@ -52,17 +52,21 @@ func Run(projectDir string, pkgs []string, list, all bool, w io.Writer) error {
 	}
 
 	externalImportsExist := false
-	pkgsToProcess := make([]pkgWithSrc, len(pkgs))
-	for i, pkgPath := range pkgs {
+	pkgsToProcess := make([]pkgWithSrc, 0, len(pkgs))
+	for _, pkgPath := range pkgs {
+		// skip testdata packages
+		if strings.Contains(pkgPath, "/testdata/") || strings.HasSuffix(pkgPath, "/testdata") {
+			continue
+		}
 		srcDir := path.Join(wd, pkgPath)
 		srcDirPkg, _ := build.ImportDir(srcDir, build.ImportComment)
 		if !strings.HasPrefix(srcDirPkg.ImportPath, projectDirImportPath) {
 			return errors.Errorf("package %s is not within project directory %q: import path %s is not within %s", srcDir, projectDir, srcDirPkg.ImportPath, projectDirImportPath)
 		}
-		pkgsToProcess[i] = pkgWithSrc{
+		pkgsToProcess = append(pkgsToProcess, pkgWithSrc{
 			pkgPath: ".",
 			srcDir:  srcDir,
-		}
+		})
 	}
 	processedPkgs := make(map[pkgWithSrc]bool)
 	for len(pkgsToProcess) > 0 {
