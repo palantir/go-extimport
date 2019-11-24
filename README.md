@@ -1,7 +1,7 @@
 DEPRECATED
 ==========
 go-extimport was originally developed to ensure the consistency of the vendor directory for projects. This was necessary
-when the vendor directory was managed manually or using basic tools such as [govendor[(https://github.com/kardianos/govendor).
+when the vendor directory was managed manually or using basic tools such as [govendor](https://github.com/kardianos/govendor).
 However, tools such as [dep](https://github.com/golang/dep) and the support for [modules in Go](https://blog.golang.org/using-go-modules) 
 have made the functionality provided by this tool unnecessary. As such, active development on this project has ended.
 
